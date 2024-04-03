@@ -13,8 +13,8 @@ const swaggerOptions = {
     openapi: '3.0.0',
     info: {
       title: 'Sakkozók Chess API',
-      version: '2.1.0',
-      description: 'Egyszerű Express API Swaggerrel',
+      version: '1.0.1',
+      description: 'Egyszerű Express API Swaggerrel és séma-tervvel',
       contact:  {
         name: 'Németh Bence',
         url: 'https://chess.sulla.hu',
@@ -40,7 +40,7 @@ app.use(cors());
 
 /**
  * @swagger
- * definitions:
+ * components:
  *  Chess:
  *    type: object
  *    properties: 
@@ -64,7 +64,25 @@ app.use(cors());
  *        type: string
  *        description: képre mutató link
  *        example: 'https://www.sulla.hu/Kasparov.jpg'
+ *  schemas:
+ *   Chess2:
+ *    type: object
+ *    properties: 
+ *      id:
+ *        type: integer
+ *      name:
+ *        type: string
+ *      birth_date:
+ *        type: string
+ *      world_ch_won:
+ *        type: integer
+ *      profile_url:
+ *        type: string
+ *      image_url:
+ *        type: string
+ * 
  */
+
 
 // Egyszerű memóriában tárolt adatbázis
 let chess = [
@@ -162,6 +180,10 @@ app.get('/chess',cors(), (req, res) => {
  *     responses:
  *       200:
  *         description: Success
+ *         content:
+ *           application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/Chess2'
  *       404:
  *         description: chess not found
  */
@@ -188,10 +210,15 @@ app.get('/chess/:id', cors(), (req, res) => {
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/definitions/Chess'
+ *             $ref: '#/components/Chess'
  *     responses:
+*     responses:
  *       201:
  *         description: Created
+ *         content:
+ *           application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/Chess2'
  *       500:
  *         description: Internal server error
  */
@@ -222,10 +249,14 @@ app.post('/chess', cors(), (req, res) => {
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/definitions/Chess'
+ *             $ref: '#/components/Chess'
  *     responses:
  *       200:
  *         description: Success
+ *         content:
+ *           application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/Chess2'
  *       404:
  *         description: chess not found
  */
@@ -260,6 +291,10 @@ app.put('/chess/:id', cors(), (req, res) => {
  *     responses:
  *       200:
  *         description: Success
+ *         content:
+ *           application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/Chess2'
  *       404:
  *         description: chess not found
  */
