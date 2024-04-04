@@ -212,7 +212,6 @@ app.get('/chess/:id', cors(), (req, res) => {
  *           schema:
  *             $ref: '#/components/Chess'
  *     responses:
-*     responses:
  *       201:
  *         description: Created
  *         content:
@@ -312,5 +311,5 @@ app.delete('/chess/:id', cors(), (req, res) => {
 
 // Indítás a megadott porton
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}/swagger`);
 });
